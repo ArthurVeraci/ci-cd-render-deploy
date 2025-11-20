@@ -10,8 +10,8 @@ COPY . .
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose port
-EXPOSE 5000
+# Expose Render default port
+EXPOSE 10000
 
-# Run Flask
-CMD ["python", "app.py"]
+# Run with Gunicorn (production server)
+CMD ["gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
